@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "PORT=8000 next dev --turbopack",
+    "dev": "next dev --turbopack -p 8000",
+    "dev:windows": "set PORT=8000 && next dev --turbopack",
+    "dev:unix": "PORT=8000 next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
