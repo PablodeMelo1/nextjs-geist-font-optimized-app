@@ -1,5 +1,26 @@
 const { verifyToken } = require('../config/jwt');
-const User = require('../models/User');
+
+// Datos de prueba en memoria (mismo que en authControllerDemo)
+const demoUsers = [
+  {
+    _id: '1',
+    name: 'Administrador Demo',
+    email: 'admin@turnos.com',
+    password: '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+    role: 'admin',
+    phone: '+54 9 11 1234-5678',
+    isActive: true
+  },
+  {
+    _id: '2',
+    name: 'Cliente Demo',
+    email: 'cliente@turnos.com',
+    password: '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+    role: 'client',
+    phone: '+54 9 11 9876-5432',
+    isActive: true
+  }
+];
 
 const protect = async (req, res, next) => {
   let token;
@@ -12,22 +33,31 @@ const protect = async (req, res, next) => {
       // Verificar token
       const decoded = verifyToken(token);
 
-      // Obtener usuario del token
-      req.user = await User.findById(decoded.id).select('-password');
+      // Obtener usuario del array demo
+      const user = demoUsers.find(u => u._id === decoded.id);
 
-      if (!req.user) {
+      if (!user) {
         return res.status(401).json({
           success: false,
           message: 'Usuario no encontrado'
         });
       }
 
-      if (!req.user.isActive) {
+      if (!user.isActive) {
         return res.status(401).json({
           success: false,
           message: 'Usuario inactivo'
         });
       }
+
+      // Asignar usuario sin password
+      req.user = {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        phone: user.phone
+      };
 
       next();
     } catch (error) {
