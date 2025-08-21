@@ -1,36 +1,154 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Sistema de Gestión de Turnos
 
-## Getting Started
+Aplicación web completa para gestionar turnos de negocios como barberías, peluquerías, spas, etc.
 
-First, run the development server:
+## 🛠️ Stack Tecnológico
+
+- **Frontend:** Next.js 15 + TypeScript + Tailwind CSS + shadcn/ui
+- **Backend:** Node.js + Express + MongoDB + JWT
+- **Base de datos:** MongoDB Atlas (configurado)
+
+## 📋 Funcionalidades
+
+- ✅ Sistema de autenticación (Login/Registro)
+- ✅ Gestión de servicios (CRUD)
+- ✅ Gestión de empleados/profesionales
+- ✅ Sistema de reserva de turnos
+- ✅ Panel de administración
+- ✅ Perfil de cliente con historial
+- ✅ Diseño responsive y moderno
+
+## 🚀 Instalación y Ejecución
+
+### 1. Instalar dependencias
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Instalar dependencias del frontend
+npm install
+
+# Instalar dependencias del backend
+cd server
+npm install
+cd ..
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Ejecutar la aplicación
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**IMPORTANTE:** Necesitas abrir 2 terminales/consolas
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+#### Terminal 1 - Backend (Puerto 3001):
+```bash
+cd server
+npm start
+```
 
-## Learn More
+#### Terminal 2 - Frontend (Puerto 8000):
 
-To learn more about Next.js, take a look at the following resources:
+**Para Windows:**
+```bash
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Para Linux/Mac:**
+```bash
+npm run dev:unix
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 3. Acceder a la aplicación
 
-## Deploy on Vercel
+- **Frontend:** http://localhost:8000
+- **Backend API:** http://localhost:3001
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 👤 Credenciales de Prueba
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Administrador:
+- **Email:** admin@turnos.com
+- **Contraseña:** admin123
+
+### Cliente:
+- **Email:** cliente@turnos.com  
+- **Contraseña:** cliente123
+
+## 📱 Páginas Disponibles
+
+1. **Página Principal** (`/`) - Landing page
+2. **Login** (`/login`) - Iniciar sesión
+3. **Registro** (`/registro`) - Crear cuenta
+4. **Servicios** (`/servicios`) - Catálogo de servicios
+5. **Perfil Cliente** (`/perfil-cliente`) - Historial de turnos
+6. **Reservar Turno** (`/agenda`) - Sistema de reservas
+7. **Panel Admin** (`/panel-admin`) - Administración completa
+
+## 🔧 Estructura del Proyecto
+
+```
+├── src/                    # Frontend (Next.js)
+│   ├── app/               # Páginas de la aplicación
+│   ├── components/ui/     # Componentes reutilizables
+│   └── lib/              # Utilidades y configuración
+├── server/                # Backend (Express)
+│   ├── controllers/       # Lógica de negocio
+│   ├── models/           # Modelos de datos
+│   ├── routes/           # Rutas de la API
+│   ├── middleware/       # Middleware personalizado
+│   └── config/           # Configuración (DB, JWT)
+└── public/               # Archivos estáticos
+```
+
+## 🌐 API Endpoints
+
+### Autenticación
+- `POST /api/auth/register` - Registro de usuario
+- `POST /api/auth/login` - Inicio de sesión
+- `GET /api/auth/profile` - Obtener perfil
+
+### Servicios
+- `GET /api/services` - Listar servicios
+- `POST /api/services` - Crear servicio
+- `PUT /api/services/:id` - Actualizar servicio
+- `DELETE /api/services/:id` - Eliminar servicio
+
+### Empleados
+- `GET /api/employees` - Listar empleados
+- `POST /api/employees` - Crear empleado
+- `PUT /api/employees/:id` - Actualizar empleado
+- `DELETE /api/employees/:id` - Eliminar empleado
+
+### Turnos
+- `GET /api/appointments` - Listar turnos
+- `POST /api/appointments` - Crear turno
+- `PUT /api/appointments/:id` - Actualizar turno
+- `DELETE /api/appointments/:id` - Cancelar turno
+
+## 🔒 Seguridad
+
+- Autenticación JWT
+- Validación de datos
+- Middleware de protección de rutas
+- Encriptación de contraseñas con bcrypt
+
+## 📝 Notas Importantes
+
+- La aplicación funciona con datos demo sin necesidad de configurar MongoDB
+- Para producción, configura las variables de entorno en `.env`
+- El sistema está preparado para escalabilidad y nuevas funcionalidades
+
+## 🆘 Solución de Problemas
+
+### Error "PORT is not recognized" en Windows:
+Usa: `npm run dev` (ya configurado para Windows)
+
+### Puerto ocupado:
+Cambia el puerto en `package.json` o mata el proceso:
+```bash
+# Windows
+netstat -ano | findstr :8000
+taskkill /PID <PID> /F
+
+# Linux/Mac  
+lsof -ti:8000 | xargs kill -9
+```
+
+## 🚀 ¡Listo para usar!
+
+La aplicación está completamente funcional y lista para personalizar según tus necesidades específicas.
